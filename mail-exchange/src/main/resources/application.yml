@@ -1,0 +1,31 @@
+# server setup
+server:
+    port: 8001
+
+# Jasypt Key
+jasypt:
+    encryptor:
+        password: MasterKey
+
+spring:
+    application:
+        name: mail-exchange
+    # DB Setup
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/inventory
+        username: root
+        password: Gv18032109!!
+    # Mail Config
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ENC(aNTvTW0Lrm26Bklx/ZV0f3nwOy8aVna/WEY9pZTvbhU=)
+        password: ENC(B2P0u8NyjmYR4Oyj5u1MTdjAHX6zvhJgZ5q0iQNFc08=)
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
