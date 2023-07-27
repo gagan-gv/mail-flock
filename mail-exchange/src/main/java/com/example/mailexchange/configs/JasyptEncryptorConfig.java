@@ -3,17 +3,21 @@ package com.example.mailexchange.configs;
 import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class JasyptEncryptorConfig {
 
+    @Value("${jasypt.encryptor.password}")
+    private String secretKey;
+
     @Bean("jasyptStringEncryptor")
-    public static StringEncryptor passwordEncryptor() {
+    public StringEncryptor passwordEncryptor() {
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword("MasterKey"); //encryptor key
+        config.setPassword(secretKey); //encryptor key
         config.setAlgorithm("PBEWithMD5AndDES");
         config.setKeyObtentionIterations("1000");
         config.setPoolSize("1");
