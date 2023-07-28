@@ -21,8 +21,8 @@ spring:
     # DB Setup
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: ENC(pApIgeqPbroNh3FUOOTCQNHKjuxaWMnQTbQLbYXlOe0fWV7zawBxOK0plTcUSV3yy0CJFbGmu94=)
-        username: ENC(Q30L1t4hRjovGenKAyDFRA==)
+        url: jdbc:mysql://localhost:3306/mail-flock
+        username: root
         password: ENC(qixg6OXUBW57lOOIKn8GU6ZjyxVYwHy1)
     # Mail Config
     mail:
@@ -36,3 +36,11 @@ spring:
                     auth: true
                     starttls:
                         enable: true
+    jpa:
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQLDialect
+        hibernate:
+            ddl-auto: create-drop
+    main:
+        allow-bean-definition-overriding: true
