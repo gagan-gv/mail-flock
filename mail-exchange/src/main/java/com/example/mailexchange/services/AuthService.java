@@ -46,7 +46,7 @@ public class AuthService implements IAuthService {
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> registerUser(@NonNull RegistrationRequest request) {
         if(userRepository.existsByUsername(request.getUsername())) {
-            throw new DuplicateKeyException("Company with the same name exists, we request you to " +
+            throw new DuplicateKeyException("User with the same name exists, we request you to " +
                     "please try forget password for account retrieval.");
         }
 
@@ -54,7 +54,11 @@ public class AuthService implements IAuthService {
 
         try {
             final String otp = sender.generateOTP(6);
-            final String verificationMessage = "Hello, \n\n";
+            final String verificationMessage = "Hello, " + request.getName() +"\n\n" +
+                    "Welcome to Mail Flock.\n" +
+                    "Here's OTP for account verification: " + otp + ".\n\n" +
+                    "Thank you,\n" +
+                    "Team Mail Flock";
 
             User user = User.builder()
                     .name(request.getName())
@@ -74,7 +78,7 @@ public class AuthService implements IAuthService {
             userRepository.save(user);
 
             response = AuthenticationResponse.builder()
-                    .message("Company has been saved to the database." +
+                    .message("User has been saved to the database." +
                             " Mail has been sent for verification.")
                     .build();
             

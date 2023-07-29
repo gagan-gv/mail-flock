@@ -4,6 +4,7 @@ import com.example.mailexchange.dto.AuthenticationRequest;
 import com.example.mailexchange.dto.AuthenticationResponse;
 import com.example.mailexchange.dto.RegistrationRequest;
 import com.example.mailexchange.services.AuthService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,10 @@ public class AuthConrtoller {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> loginUser(@RequestBody @Valid AuthenticationRequest request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/renew")
+    public ResponseEntity<AuthenticationResponse> refreshToken(HttpServletRequest request) {
+        return authService.refreshToken(request);
     }
 }

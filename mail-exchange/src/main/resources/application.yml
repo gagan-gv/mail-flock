@@ -42,5 +42,3 @@ spring:
                 dialect: org.hibernate.dialect.MySQLDialect
         hibernate:
             ddl-auto: create-drop
-    main:
-        allow-bean-definition-overriding: true
