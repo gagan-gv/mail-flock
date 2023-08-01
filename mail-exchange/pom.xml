@@ -107,8 +107,12 @@
 				<configuration>
 					<excludes>
 						<exclude>**/lombok/**/*.class</exclude>
-						<exclude>**/MailExchangeApplication.class</exclude>
+						<exclude>**/MailFlockApplication.class</exclude>
 						<exclude>**/controllers/**</exclude>
+						<exclude>**/components/**</exclude>
+						<exclude>**/configs/**</exclude>
+						<exclude>**/models/**</exclude>
+						<exclude>**/dto/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
