@@ -1,6 +1,6 @@
-package com.example.mailexchange.components;
+package com.example.mailflock.components;
 
-import com.example.mailexchange.services.JWTService;
+import com.example.mailflock.services.JWTService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

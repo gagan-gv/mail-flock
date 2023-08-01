@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>mail-exchange</artifactId>
+	<artifactId>mail-flock</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mail-exchange</name>
+	<name>mail-flock</name>
 	<description>Cold Mailing Application API</description>
 	<properties>
 		<java.version>17</java.version>

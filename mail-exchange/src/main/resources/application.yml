@@ -28,8 +28,8 @@ spring:
     mail:
         host: ENC(+T4OYuJmPcVkCz4PPIjmoQVmMFLMrgmm)
         port: 587
-        username: ENC(aNTvTW0Lrm26Bklx/ZV0f3nwOy8aVna/WEY9pZTvbhU=)
-        password: ENC(B2P0u8NyjmYR4Oyj5u1MTdjAHX6zvhJgZ5q0iQNFc08=)
+        username: ENC(MOKvhgCmMVBE2JO6JVZcGcBdhoqCxn4RPI/9UPyDLPM=)
+        password: ENC(o0TipG2XN6hPZwR8IWY9GxjETe+jKrVHWSMaFcCCA1o=)
         properties:
             mail:
                 smtp:
@@ -41,4 +41,4 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
         hibernate:
-            ddl-auto: create-drop
+            ddl-auto: update

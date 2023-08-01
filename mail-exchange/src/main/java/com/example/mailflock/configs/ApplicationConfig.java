@@ -1,6 +1,6 @@
-package com.example.mailexchange.configs;
+package com.example.mailflock.configs;
 
-import com.example.mailexchange.repositories.UserRepository;
+import com.example.mailflock.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 

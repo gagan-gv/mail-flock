@@ -1,4 +1,6 @@
-package com.example.mailexchange.services;
+package com.example.mailflock.services;
+
+import com.example.mailflock.services.interfaces.IJWTService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JWTService {
+public class JWTService implements IJWTService {
     @Value(value = "${application.security.jwt.secret-key}")
     private String secretKey;
 
@@ -27,16 +29,23 @@ public class JWTService {
     @Value(value = "${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
+    @Override
     public String extractUsername(String jwtToken) {
         return extractClaim(jwtToken, Claims::getSubject);
     }
 
+    @Override
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(Map<String, Object> claims, UserDetails userDetails, long expirationValue) {
+    @Override
+    public String generateToken(
+            Map<String, Object> claims,
+            UserDetails userDetails,
+            long expirationValue
+    ) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
@@ -46,6 +55,7 @@ public class JWTService {
                 .compact();
     }
 
+    @Override
     public String generateToken(UserDetails userDetails) {
         return generateToken(
                 new HashMap<>(),
@@ -53,10 +63,12 @@ public class JWTService {
                 accessExpiration);
     }
 
+    @Override
     public String generateRefreshToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
+    @Override
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);

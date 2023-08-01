@@ -1,6 +1,6 @@
-package com.example.mailexchange.configs;
+package com.example.mailflock.configs;
 
-import com.example.mailexchange.components.JWTAuthenticationFilter;
+import com.example.mailflock.components.JWTAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
 

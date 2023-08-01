@@ -1,7 +1,8 @@
-package com.example.mailexchange.dto;
+package com.example.mailflock.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,16 +10,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AuthenticationResponse {
+public class MessageResponse {
     @JsonAlias(value = "msg")
     private String message;
-
-    @JsonAlias(value = "access_token")
-    private String accessToken;
-
-    @JsonAlias(value = "refresh_token")
-    private String refreshToken;
 }

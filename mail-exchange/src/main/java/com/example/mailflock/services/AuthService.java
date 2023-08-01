@@ -1,12 +1,11 @@
-package com.example.mailexchange.services;
+package com.example.mailflock.services;
 
-import com.example.mailexchange.components.MailingManager;
-import com.example.mailexchange.dto.AuthenticationResponse;
-import com.example.mailexchange.dto.AuthenticationRequest;
-import com.example.mailexchange.dto.RegistrationRequest;
-import com.example.mailexchange.models.User;
-import com.example.mailexchange.repositories.UserRepository;
-import com.example.mailexchange.services.interfaces.IAuthService;
+import com.example.mailflock.dto.AuthenticationResponse;
+import com.example.mailflock.dto.AuthenticationRequest;
+import com.example.mailflock.dto.RegistrationRequest;
+import com.example.mailflock.models.User;
+import com.example.mailflock.repositories.UserRepository;
+import com.example.mailflock.services.interfaces.IAuthService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
@@ -34,7 +33,7 @@ public class AuthService implements IAuthService {
     @Value("${spring.mail.username}")
     private String fromMail;
 
-    private final static String FROM_NAME = "Team Mail Exchange";
+    private static final String FROM_NAME = "Team Mail Flock";
 
     private final MailingManager sender;
     private final UserRepository userRepository;
@@ -58,7 +57,7 @@ public class AuthService implements IAuthService {
                     "Welcome to Mail Flock.\n" +
                     "Here's OTP for account verification: " + otp + ".\n\n" +
                     "Thank you,\n" +
-                    "Team Mail Flock";
+                    FROM_NAME;
 
             User user = User.builder()
                     .name(request.getName())
@@ -101,7 +100,7 @@ public class AuthService implements IAuthService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<AuthenticationResponse> verifyUser(String emailId, String otp) {
+    public ResponseEntity<AuthenticationResponse> verifyUser(@NonNull String emailId, @NonNull String otp) {
 
         AuthenticationResponse response;
 
@@ -138,7 +137,7 @@ public class AuthService implements IAuthService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public ResponseEntity<AuthenticationResponse> login(AuthenticationRequest credentials) {
+    public ResponseEntity<AuthenticationResponse> login(@NonNull AuthenticationRequest credentials) {
         AuthenticationResponse response;
 
         try {
@@ -197,7 +196,7 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    public ResponseEntity<AuthenticationResponse> refreshToken(HttpServletRequest request) {
+    public ResponseEntity<AuthenticationResponse> refreshToken(@NonNull HttpServletRequest request) {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String username;

@@ -1,5 +1,6 @@
-package com.example.mailexchange.components;
+package com.example.mailflock.services;
 
+import com.example.mailflock.services.interfaces.IMailingManager;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -7,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -15,22 +15,11 @@ import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
-public class MailingManager {
+public class MailingManager implements IMailingManager {
 
     private final JavaMailSender javaMailSender;
 
-    /**
-     *
-     * @param fromMail Company's Mail
-     * @param fromName Company's Name
-     * @param toMail Receiver's Mail
-     * @param subject Mail Subject
-     * @param message Mail Content, can be HTML
-     * @param isHTML Checks if content is in HTML format
-     * @throws MessagingException Will be thrown if there was an error while sending the exception
-     * @throws UnsupportedEncodingException Will be thrown if the message content can't be encoded
-     *
-     */
+    @Override
     public void sendMail(
             String fromMail,
             String fromName,
@@ -50,12 +39,7 @@ public class MailingManager {
         javaMailSender.send(mimeMessage);
     }
 
-    /**
-     *
-     * @param length OTP length
-     * @return String of length defined by the entity or uses the default length of 6 digits
-     *
-     */
+    @Override
     public String generateOTP(int length) {
         String otpCharacters = "0123456789";
         Random random = new Random();

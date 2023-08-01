@@ -1,6 +1,6 @@
-package com.example.mailexchange.repositories;
+package com.example.mailflock.repositories;
 
-import com.example.mailexchange.models.User;
+import com.example.mailflock.models.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
