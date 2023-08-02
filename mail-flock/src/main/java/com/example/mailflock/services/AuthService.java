@@ -44,8 +44,13 @@ public class AuthService implements IAuthService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> registerUser(@NonNull RegistrationRequest request) {
-        if(userRepository.existsByUsername(request.getUsername())) {
-            throw new DuplicateKeyException("User with the same name exists, we request you to " +
+        if(userRepository.findByUsername(request.getUsername()).isPresent()) {
+            throw new DuplicateKeyException("User with same username exists, we request you to " +
+                    "please try forget password for account retrieval.");
+        }
+
+        if(userRepository.findByEmailId(request.getEmailId()).isPresent()) {
+            throw new DuplicateKeyException("User with same email id exists, we request you to " +
                     "please try forget password for account retrieval.");
         }
 
