@@ -41,12 +41,6 @@ public class UserMailingService implements IUserMailingService {
                     .build();
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (UsernameNotFoundException e) {
-            response = MessageResponse.builder()
-                    .message("User not found")
-                    .build();
-
-            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(response);
         } catch (Exception e) {
             response = MessageResponse.builder()
                     .message(e.getMessage())
