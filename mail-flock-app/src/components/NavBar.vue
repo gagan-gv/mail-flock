@@ -9,6 +9,7 @@
       <a href="#why" class="nav-link">Why MailFlock?</a>
       <router-link to="/services" class="nav-link">Services</router-link>
       <router-link to="/templates" class="nav-link">Templates</router-link>
+      <router-link to="/newsletters" class="nav-link">Newsletters</router-link>
       <router-link to="/contact" class="nav-link">Contact</router-link>
     </div>
     <div class="nav-auth">
@@ -35,6 +36,8 @@ export default {
   align-items: center;
   background-color: #f3f3f3;
   backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
 }
 
 .navbar > .nav-logo > .logo-link {
@@ -74,28 +77,7 @@ export default {
   position: relative;
 }
 
-.navbar > .nav-auth > .sec-btn {
-  color: #222;
-  transition: 0.5s linear;
-}
-
-.navbar > .nav-auth > .prm-btn {
-  display: inline-block;
-  text-align: center;
-  background: #4caf50;
-  color: #f3f3f3;
-  margin: -10px 0;
-  padding: 10px 30px;
-  border-radius: 30px;
-  min-width: 30px;
-}
-
-.navbar > .nav-auth > .prm-btn:hover {
-  filter: drop-shadow(0 0 20px #ccc);
-}
-
-.navbar > .nav-links > .nav-link::before,
-.navbar > .nav-auth > .sec-btn::before {
+.navbar > .nav-links > .nav-link::before {
   content: "";
   position: absolute;
   width: 88%;
@@ -109,14 +91,12 @@ export default {
   transition: transform 0.25s ease-in-out;
 }
 
-.navbar > .nav-links > .nav-link:hover::before,
-.navbar > .nav-auth > .sec-btn:hover::before {
+.navbar > .nav-links > .nav-link:hover::before {
   transform-origin: right;
   transform: scaleX(1);
 }
 
-.navbar > .nav-links > .nav-link::after,
-.navbar > .nav-auth > .sec-btn::after {
+.navbar > .nav-links > .nav-link::after {
   content: "";
   position: absolute;
   width: 8%;
@@ -130,8 +110,7 @@ export default {
   transition: transform 0.25s ease-in-out;
 }
 
-.navbar > .nav-links > .nav-link:hover::after,
-.navbar > .nav-auth > .sec-btn:hover::after {
+.navbar > .nav-links > .nav-link:hover::after {
   transform-origin: left;
   transform: scaleX(1);
 }
