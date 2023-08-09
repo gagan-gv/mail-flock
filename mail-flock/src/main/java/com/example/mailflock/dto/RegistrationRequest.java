@@ -26,4 +26,6 @@ public class RegistrationRequest {
 
     @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&]).{8,20}$")
     private String password;
+
+    private boolean subscribe;
 }

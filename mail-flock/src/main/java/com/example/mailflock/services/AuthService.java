@@ -40,23 +40,24 @@ public class AuthService implements IAuthService {
     private final AuthenticationManager authManager;
     private final JWTService jwtService;
     private final PasswordEncoder passwordEncoder;
+    private final SubscriptionService subscriptionService;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> registerUser(@NonNull RegistrationRequest request) {
-        if(userRepository.findByUsername(request.getUsername()).isPresent()) {
-            throw new DuplicateKeyException("User with same username exists, we request you to " +
-                    "please try forget password for account retrieval.");
-        }
-
-        if(userRepository.findByEmailId(request.getEmailId()).isPresent()) {
-            throw new DuplicateKeyException("User with same email id exists, we request you to " +
-                    "please try forget password for account retrieval.");
-        }
-
         AuthenticationResponse response;
 
         try {
+            if(userRepository.findByUsername(request.getUsername()).isPresent()) {
+                throw new DuplicateKeyException("User with same username exists, we request you to " +
+                        "please try forget password for account retrieval.");
+            }
+
+            if(userRepository.findByEmailId(request.getEmailId()).isPresent()) {
+                throw new DuplicateKeyException("User with same email id exists, we request you to " +
+                        "please try forget password for account retrieval.");
+            }
+
             final String otp = sender.generateOTP(6);
             final String verificationMessage = "Hello, " + request.getName() +"\n\n" +
                     "Welcome to Mail Flock.\n" +
@@ -80,6 +81,10 @@ public class AuthService implements IAuthService {
                     verificationMessage,
                     false);
             userRepository.save(user);
+
+            if(request.isSubscribe()) {
+                subscriptionService.subscribe(request.getEmailId());
+            }
 
             response = AuthenticationResponse.builder()
                     .message("User has been saved to the database." +

@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -50,6 +48,8 @@ public class AuthServiceTest {
 
     @Mock
     private PasswordEncoder passwordEncoder;
+
+    @Mock SubscriptionService subscriptionService;
 
     @InjectMocks
     private AuthService authService;
@@ -85,6 +85,32 @@ public class AuthServiceTest {
     }
 
     @Test
+    void testRegisterUser_Subscribed() {
+        // Arrange
+        RegistrationRequest request = new RegistrationRequest();
+        request.setName("Test");
+        request.setUsername("test_user");
+        request.setEmailId("test@example.com");
+        request.setPassword("testPassword");
+        request.setSubscribe(true);
+
+        // Act
+        when(userRepository.findByUsername(request.getUsername())).thenReturn(Optional.empty());
+        when(userRepository.findByEmailId(request.getEmailId())).thenReturn(Optional.empty());
+        when(mailingManager.generateOTP(anyInt())).thenReturn("123456");
+        when(userRepository.save(any(User.class))).thenReturn(new User());
+
+        ResponseEntity<AuthenticationResponse> response = authService.registerUser(request);
+
+        // Assert
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(
+                "User has been saved to the database. Mail has been sent for verification.",
+                Objects.requireNonNull(response.getBody()).getMessage()
+        );
+    }
+
+    @Test
     void testRegisterUser_DuplicateUsername() {
         // Arrange
         RegistrationRequest request = new RegistrationRequest();
@@ -97,16 +123,14 @@ public class AuthServiceTest {
         when(userRepository.findByUsername(request.getUsername())).thenReturn(Optional.of(new User()));
         when(userRepository.findByEmailId(request.getEmailId())).thenReturn(Optional.empty());
 
-        // Assert
-        assertThrows(DuplicateKeyException.class, () -> {
-            ResponseEntity<AuthenticationResponse> response = authService.registerUser(request);
+        ResponseEntity<AuthenticationResponse> response = authService.registerUser(request);
 
-            assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-            assertEquals(
-                    "User with same username exists, we request you to " +
-                            "please try forget password for account retrieval.",
-                    Objects.requireNonNull(response.getBody()).getMessage());
-        });
+        // Assert
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(
+                "User with same username exists, we request you to " +
+                        "please try forget password for account retrieval.",
+                Objects.requireNonNull(response.getBody()).getMessage());
     }
 
     @Test
@@ -122,15 +146,14 @@ public class AuthServiceTest {
         when(userRepository.findByUsername(request.getUsername())).thenReturn(Optional.empty());
         when(userRepository.findByEmailId(request.getEmailId())).thenReturn(Optional.of(new User()));
 
+        ResponseEntity<AuthenticationResponse> response = authService.registerUser(request);
+
         // Assert
-        assertThrows(DuplicateKeyException.class, () -> {
-            ResponseEntity<AuthenticationResponse> response = authService.registerUser(request);
-            assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
-            assertEquals(
-                    "User with same email id exists, we request you to " +
-                            "please try forget password for account retrieval.",
-                    Objects.requireNonNull(response.getBody()).getMessage());
-        });
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        assertEquals(
+                "User with same email id exists, we request you to " +
+                        "please try forget password for account retrieval.",
+                Objects.requireNonNull(response.getBody()).getMessage());
     }
 
     @Test
