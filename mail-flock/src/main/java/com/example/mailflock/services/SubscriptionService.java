@@ -111,7 +111,7 @@ public class SubscriptionService implements ISubscriptionService {
             Subscriber subscription = Subscriber.builder()
                     .emailId(emailId)
                     .build();
-            subscriptionRepository.save(subscription);
+            subscriptionRepository.delete(subscription);
 
             mailingManager.sendMail(
                     fromMail,
