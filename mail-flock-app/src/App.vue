@@ -12,8 +12,9 @@
   text-align: center;
   color: #222;
   background-color: #f3f3f3;
-  height: 100vh;
 }
+
+/* Primary and Secondary Buttons */
 
 .prm-btn {
   display: inline-block;
@@ -69,6 +70,53 @@
 }
 
 .sec-btn:hover::after {
+  transform-origin: left;
+  transform: scaleX(1);
+}
+
+/* Links */
+.link {
+  color: #222;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+  position: relative;
+}
+
+.link::before {
+  content: "";
+  position: absolute;
+  width: 88%;
+  height: 3px;
+  border-radius: 5px;
+  background-color: #4caf50;
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.25s ease-in-out;
+}
+
+.link:hover::before {
+  transform-origin: right;
+  transform: scaleX(1);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  width: 8%;
+  height: 3px;
+  border-radius: 20px;
+  background-color: #4caf50;
+  bottom: 0;
+  right: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.25s ease-in-out;
+}
+
+.link:hover::after {
   transform-origin: left;
   transform: scaleX(1);
 }
