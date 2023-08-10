@@ -10,23 +10,38 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 
 ## API Endpoints
 
-### Authourization
+### Authorization
 
-| Endpoint | Description | Mapping |
-| :---: | --- | --- |
-| /api/auth/register | Registers a user and saves required data in the database and initiates OTP verification | POST |
-| /api/auth/verify | Verifies the OTP that has been shared to the user via email | PATCH |
-| /api/auth/login | Authorizes the user and returns access and refresh tokens | POST |
+|      Endpoint      | Description                                                                             | Mapping |
+|:------------------:|-----------------------------------------------------------------------------------------|---------|
+| /api/auth/register | Registers a user and saves required data in the database and initiates OTP verification | POST    |
+|  /api/auth/verify  | Verifies the OTP that has been shared to the user via email                             | PATCH   |
+|  /api/auth/login   | Authorizes the user and returns access and refresh tokens                               | POST    |
 
 ### User
 
-| Endpoint | Description | Mapping |
-| --- | --- | --- |
-| /api/user/ | Takes in updatable parameters and updates the details in the database | PUT |
-| /api/user | Deletes the user | DELETE |
+|  Endpoint   | Description                                                           | Mapping |
+|:-----------:|-----------------------------------------------------------------------|---------|
+| /api/user/  | Takes in updatable parameters and updates the details in the database | PUT     |
+|  /api/user  | Deletes the user                                                      | DELETE  |
 
 ### Mailing
 
-| Endpoint | Description | Mapping |
-| --- | --- | --- |
-| /api/mail/send | Takes in mail content like to mail, bcc, cc, content, subject and text type (boolean \| plain or HTML) and sends mail to all the addresses | POST |
+| Endpoint       | Description                                                                                                                                | Mapping |
+|:---------------|--------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| /api/mail/send | Takes in mail content like to mail, bcc, cc, content, subject and text type (boolean \| plain or HTML) and sends mail to all the addresses | POST    |
+
+### Subscription
+
+|      Endpoint       | Description                                                                     | Mapping |
+|:-------------------:|---------------------------------------------------------------------------------|---------|
+|   /api/subscribe/   | Takes in email id, adds user to subscription and send a confirmation mail       | POST    |
+|   /api/subscribe/   | Takes in email id, removes user from subscription  and send a confirmation mail | DELETE  |
+| /api/subscribe/send | Takes in content to share with subscribers                                      | POST    |
+
+### Contact
+
+|      Endpoint      | Description                                                            | Mapping |
+|:------------------:|------------------------------------------------------------------------|---------|
+|    /api/contact    | Takes in any queries from user/customer and sends a mail for the query | POST    |
+| /api/contact/demo/ | Takes in book a demo request and send a calendar invite to requester   | POST    |
