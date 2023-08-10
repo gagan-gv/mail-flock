@@ -3,6 +3,8 @@ package com.example.mailflock.services.interfaces;
 import jakarta.mail.MessagingException;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.sql.Time;
 
 public interface IMailingManager {
 
@@ -34,4 +36,17 @@ public interface IMailingManager {
      *
      */
     public String generateOTP(int length);
+
+    /**
+     * Sends a calendar invite to the requester
+     * @param toMail Recipient Mail
+     * @param date Date of Demo
+     * @param time Time of Demo
+     */
+    void sendCalendarInvite(
+            String toMail,
+            Date date,
+            Time time
+    ) throws MessagingException,
+            UnsupportedEncodingException;
 }

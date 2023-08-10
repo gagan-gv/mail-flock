@@ -6,13 +6,20 @@ import jakarta.mail.internet.MimeMessage;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Random;
+
+import static com.example.mailflock.utils.Constants.FROM_MAIL;
+import static com.example.mailflock.utils.Constants.FROM_NAME;
 
 @Service
 @RequiredArgsConstructor
@@ -59,5 +66,47 @@ public class MailingManager implements IMailingManager {
         }
 
         return otpBuilder.toString();
+    }
+
+    @Override
+    public void sendCalendarInvite(
+            String toMail,
+            Date date,
+            Time time
+    ) throws MessagingException,
+            UnsupportedEncodingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+        String icsContent = createICalFile(date, time);
+        ByteArrayResource icsAttachment = new ByteArrayResource(icsContent.getBytes());
+
+        helper.setFrom(FROM_MAIL, FROM_NAME);
+        helper.setTo(toMail);
+        helper.setSubject("Mail Flock Demo Calendar Invite");
+        helper.addAttachment("Mail Flock Demo.ics", icsAttachment, "text/calendar");
+        helper.setText("Please find the calendar blocker for the Mail Flock Demo attached");
+
+        javaMailSender.send(message);
+    }
+
+    private String createICalFile(Date date, Time time) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss");
+        String formattedDate = dateFormat.format(date);
+        String formattedTime = dateFormat.format(time);
+
+        String icsContent = "BEGIN:VCALENDAR\n" +
+                "VERSION:2.0\n" +
+                "PRODID:-//Mail Flock//Mail Flock//EN\n" +
+                "BEGIN:VEVENT\n" +
+                "DTSTART:" + formattedDate + "T" + formattedTime + "\n" +
+                "DTEND:" + formattedDate + "T" + formattedTime + "\n" +
+                "SUMMARY:Mail Flock Demo\n" +
+                "DESCRIPTION:This is a calendar blocker for Mail Flock Demo\n" +
+                "UID:" + System.currentTimeMillis() + "\n" +
+                "END:VEVENT\n" +
+                "END:VCALENDAR\n";
+
+        return icsContent;
     }
 }
