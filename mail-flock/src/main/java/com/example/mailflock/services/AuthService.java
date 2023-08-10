@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,14 +25,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.example.mailflock.utils.Constants.FROM_MAIL;
+import static com.example.mailflock.utils.Constants.FROM_NAME;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService implements IAuthService {
-
-    @Value("${spring.mail.username}")
-    private String fromMail;
-
-    private static final String FROM_NAME = "Team Mail Flock";
 
     private final MailingManager sender;
     private final UserRepository userRepository;
@@ -74,7 +71,7 @@ public class AuthService implements IAuthService {
                     .build();
 
             sender.sendMail(
-                    fromMail,
+                    FROM_MAIL,
                     FROM_NAME,
                     request.getEmailId(),
                     "Mail Exchange - OTP Verification",
