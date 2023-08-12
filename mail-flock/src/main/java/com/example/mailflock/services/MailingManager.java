@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
@@ -18,14 +20,14 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Random;
 
-import static com.example.mailflock.utils.Constants.FROM_MAIL;
-import static com.example.mailflock.utils.Constants.FROM_NAME;
+import static com.example.mailflock.utils.Constants.*;
 
 @Service
 @RequiredArgsConstructor
 public class MailingManager implements IMailingManager {
 
     private final JavaMailSender javaMailSender;
+    private final TemplateEngine templateEngine;
 
     @Override
     @Async
@@ -43,7 +45,16 @@ public class MailingManager implements IMailingManager {
         helper.setFrom(fromMail, fromName);
         helper.setTo(toMail);
         helper.setSubject(subject);
-        helper.setText(message, isHTML);
+        System.out.println("HTML -- " + isHTML);
+        if(isHTML) {
+            Context context = new Context();
+            context.setVariable("content", message);
+            String processedString = templateEngine.process(EMAIL_TEMPLATE, context);
+
+            helper.setText(processedString, true);
+        } else {
+            helper.setText(message, false);
+        }
 
         javaMailSender.send(mimeMessage);
     }
@@ -69,6 +80,7 @@ public class MailingManager implements IMailingManager {
     }
 
     @Override
+    @Async
     public void sendCalendarInvite(
             String toMail,
             Date date,

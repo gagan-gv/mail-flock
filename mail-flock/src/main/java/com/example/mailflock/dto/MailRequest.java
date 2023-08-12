@@ -16,9 +16,12 @@ import lombok.NoArgsConstructor;
 public class MailRequest {
     @JsonAlias(value = "to_mail")
     private String[] toMail;
+
     private String[] cc;
     private String[] bcc;
     private String subject;
     private String content;
+
+    @JsonAlias(value = "html")
     private boolean isHTML;
 }

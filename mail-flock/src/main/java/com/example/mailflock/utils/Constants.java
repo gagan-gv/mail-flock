@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 public record Constants() {
     @Value("${spring.mail.username}")
     public static String FROM_MAIL;
+
     public static final String FROM_NAME = "Team Mail Flock";
 
     public static final String SUBSCRIBE_MESSAGE = "Hey There,\n" +
@@ -35,4 +36,6 @@ public record Constants() {
             "to reach out to our customer support team at support@mailflock.com. We're " +
             "here to listen and assist you in any way we can.\n\n" +
             "Regards,\n" + FROM_NAME;
+
+    public static final String EMAIL_TEMPLATE = "template";
 }
