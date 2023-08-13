@@ -30,12 +30,18 @@ spring:
         port: 587
         username: ENC(MOKvhgCmMVBE2JO6JVZcGcBdhoqCxn4RPI/9UPyDLPM=)
         password: ENC(o0TipG2XN6hPZwR8IWY9GxjETe+jKrVHWSMaFcCCA1o=)
+        default-encoding: UTF-8
         properties:
             mail:
                 smtp:
                     auth: true
+                    writetimeout: 20000
+                    connectiontimeout: 20000
+                    timeout: 20000
                     starttls:
                         enable: true
+                mime:
+                    charset: UTF
     jpa:
         properties:
             hibernate:
