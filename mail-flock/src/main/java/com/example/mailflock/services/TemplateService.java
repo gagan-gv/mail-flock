@@ -91,7 +91,7 @@ public class TemplateService implements ITemplateService {
             if(!template.getContent().equals(details.getContent())) {
                 template.setContent(details.getContent());
             }
-            if(template.isHTML() == details.isHTML()) {
+            if(template.isHTML() != details.isHTML()) {
                 template.setHTML(details.isHTML());
             }
 

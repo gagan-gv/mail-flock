@@ -45,7 +45,7 @@ public class MailingManager implements IMailingManager {
         helper.setFrom(fromMail, fromName);
         helper.setTo(toMail);
         helper.setSubject(subject);
-        System.out.println("HTML -- " + isHTML);
+
         if(isHTML) {
             Context context = new Context();
             context.setVariable("content", message);
