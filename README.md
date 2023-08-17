@@ -45,3 +45,11 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 |:------------------:|------------------------------------------------------------------------|---------|
 |    /api/contact    | Takes in any queries from user/customer and sends a mail for the query | POST    |
 | /api/contact/demo/ | Takes in book a demo request and send a calendar invite to requester   | POST    |
+
+### Templates
+|         Endpoint         | Description                                               | Mapping |
+|:------------------------:|-----------------------------------------------------------|---------|
+|     /api/templates/      | Takes in template details and creates the template        | POST    |
+|   /api/templates?{id}    | Takes in template details and id and updates the template | PATCH   |
+|     /api/templates/      | Lists all the templates                                   | GET     |
+| /api/templates/view?{id} | List all details of the template with given id            | GET     |
