@@ -4,8 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -37,8 +36,7 @@ public class Template {
     @Builder.Default
     private Long timesUsed = 0L;
 
-    @OneToMany
-    @MapsId
+    @JoinColumn(name = "user_id")
     @Builder.Default
     private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 }
