@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 
 const routes = [
   {
@@ -17,6 +18,14 @@ const routes = [
     component: LoginView,
     meta: {
       title: 'Login'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'page not found',
+    component: PageNotFound,
+    meta: {
+      title: 'Error, Page Not Found'
     }
   }
 ]

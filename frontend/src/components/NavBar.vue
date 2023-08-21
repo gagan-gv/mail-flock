@@ -2,7 +2,7 @@
     <nav class="nav">
         <section class="nav-img">
             <router-link to="/" class="nav-img-link">
-                <img src="@/assets/logo.png" alt="Mail Flock Logo">
+                <img src="@/assets/logo.png" alt="Mail Flock Logo" />
             </router-link>
         </section>
         <section class="nav-auth">
@@ -22,6 +22,9 @@
     background-color: #f3f3f3;
     opacity: 0.8;
     backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    border-bottom: 2px solid #4caf50;
 }
 
 .nav > .nav-img > .nav-img-link {
