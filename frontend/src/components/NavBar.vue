@@ -20,7 +20,6 @@
     height: 80px;
     padding: 10px 30px;
     background-color: #f3f3f3;
-    opacity: 0.8;
     backdrop-filter: blur(20px);
     position: sticky;
     top: 0;

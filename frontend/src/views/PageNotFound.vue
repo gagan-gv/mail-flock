@@ -18,6 +18,6 @@ export default {
 }
 
 .error-page > .error-img {
-    max-width: 600px;
+    max-width: 650px;
 }
 </style>
