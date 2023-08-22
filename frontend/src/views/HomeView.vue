@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HomeView',
   data () {
@@ -24,8 +26,13 @@ export default {
       words: ['Reach', 'Connect', 'Convert'],
       currentIndex: 0,
       intervalId: null,
-      animationDuration: 1500
+      animationDuration: 1500,
+      accessToken: localStorage.getItem('mail_flock_access_token'),
+      refreshToken: localStorage.getItem('mail_flock_refresh_token')
     }
+  },
+  created () {
+    this.checkAccessToken()
   },
   computed: {
     word () {
@@ -38,6 +45,37 @@ export default {
     },
     changeWords () {
       this.currentIndex = (this.currentIndex + 1) % this.words.length
+    },
+    async checkAccessToken () {
+      if (this.accessToken) {
+        // Access Token is not expired
+        this.$router.push('/dashboard')
+      } else if (!this.accessToken && this.refreshToken) {
+        // Access token is expired and can be refreshed
+        await this.refreshAccessToken()
+      } else {
+        // Access & Refresh Tokens are expired
+        this.$router.push('/')
+      }
+    },
+    async refreshAccessToken () {
+      if (this.refreshToken) {
+        try {
+          const response = await axios.post('/api/renew', {
+            refresh_token: this.refreshToken
+          })
+
+          this.accessToken = response.data.accessToken
+          localStorage.setItem('mail_flock_access_token', this.accessToken)
+
+          this.checkAccessToken()
+        } catch (error) {
+          // Refresh token has expired
+          this.$router.push('/')
+        }
+      } else {
+        this.$router.push('/')
+      }
     }
   },
   mounted () {
