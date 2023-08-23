@@ -1,5 +1,5 @@
 <template>
-    <nav class="nav">
+    <nav class="nav" v-if="showNavbar">
         <section class="nav-img">
             <router-link to="/" class="nav-img-link">
                 <img src="@/assets/logo.png" alt="Mail Flock Logo" />
@@ -42,6 +42,11 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  computed: {
+    showNavbar () {
+      return this.$route.path !== '/login' && this.$route.path !== '/register'
+    }
+  }
 }
 </script>
