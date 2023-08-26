@@ -17,6 +17,7 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 | /api/auth/register | Registers a user and saves required data in the database and initiates OTP verification | POST    |
 |  /api/auth/verify  | Verifies the OTP that has been shared to the user via email                             | PATCH   |
 |  /api/auth/login   | Authorizes the user and returns access and refresh tokens                               | POST    |
+| /api/auth/renew/   | Refreshes access token whenever called                                                  | POST    |
 
 ### User
 
@@ -53,3 +54,8 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 |   /api/templates?{id}    | Takes in template details and id and updates the template | PATCH   |
 |     /api/templates/      | Lists all the templates                                   | GET     |
 | /api/templates/view?{id} | List all details of the template with given id            | GET     |
+
+## Testing
+
+- Manual using Postman
+- Unit Tests with JUnit5 and Mockito
