@@ -1,12 +1,12 @@
 package com.example.mailflock.controllers;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mailflock.dto.MessageResponse;
 import com.example.mailflock.dto.SubscriptionContent;
@@ -14,7 +14,7 @@ import com.example.mailflock.services.SubscriptionService;
 
 import lombok.RequiredArgsConstructor;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/subscribe")
 public class SubscriptionController {
