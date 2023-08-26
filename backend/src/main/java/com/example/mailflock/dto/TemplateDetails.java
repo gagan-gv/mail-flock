@@ -1,7 +1,5 @@
 package com.example.mailflock.dto;
 
-import com.example.mailflock.models.User;
-
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

@@ -12,8 +12,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -37,6 +35,5 @@ public class Template {
     private Long timesUsed = 0L;
 
     @JoinColumn(name = "user_id")
-    @Builder.Default
-    private User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    private User user;
 }

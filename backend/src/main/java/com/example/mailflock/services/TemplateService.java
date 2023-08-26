@@ -42,6 +42,7 @@ public class TemplateService implements ITemplateService {
                     .subject(details.getSubject())
                     .content(details.getSubject())
                     .isHTML(details.isHTML())
+                    .user(user)
                     .build();
 
             templateRepository.save(template);

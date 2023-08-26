@@ -11,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
-@CrossOrigin
 public class UserController {
 
     private final UserService userService;
