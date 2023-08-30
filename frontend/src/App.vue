@@ -8,6 +8,7 @@
 // @ is an alias to /src
 import NavBar from "@/components/common/NavBar.vue";
 import FooterComponent from "@/components/common/Footer.vue";
+
 export default {
   name: "LoginView",
   components: {
@@ -27,6 +28,7 @@ export default {
   background-color: #f3f3f3;
   height: 100vh;
 }
+
 .link,
 .link:hover,
 .link:visited,
@@ -37,6 +39,7 @@ export default {
   font-weight: 500;
   position: relative;
 }
+
 .prm-btn {
   display: inline-block;
   text-align: center;
@@ -47,10 +50,12 @@ export default {
   min-width: 30px;
   margin: -10px 0;
 }
+
 .prm-btn:hover {
   color: #f3f3f3;
   filter: drop-shadow(0 0 20px #ccc);
 }
+
 .sec-btn::before {
   content: "";
   position: absolute;
@@ -64,6 +69,7 @@ export default {
   transform: scaleX(0);
   transition: 0.5s all;
 }
+
 .sec-btn::after {
   content: "";
   position: absolute;
@@ -77,10 +83,12 @@ export default {
   transform: scaleX(0);
   transition: 0.5s all;
 }
+
 .sec-btn:hover::before {
   transform-origin: right;
   transform: scaleX(1);
 }
+
 .sec-btn:hover::after {
   transform-origin: left;
   transform: scaleX(1);

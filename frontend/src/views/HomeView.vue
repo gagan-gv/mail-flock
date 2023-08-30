@@ -27,8 +27,8 @@ export default {
       currentIndex: 0,
       intervalId: null,
       animationDuration: 1500,
-      accessToken: localStorage.getItem("mail_flock_access_token"),
-      refreshToken: localStorage.getItem("mail_flock_refresh_token"),
+      accessToken: localStorage.getItem("access_token"),
+      refreshToken: localStorage.getItem("refresh_token"),
     };
   },
   created() {
@@ -65,7 +65,7 @@ export default {
             refresh_token: this.refreshToken,
           });
           this.accessToken = response.data.accessToken;
-          localStorage.setItem("mail_flock_access_token", this.accessToken);
+          localStorage.setItem("access_token", this.accessToken);
           this.checkAccessToken();
         } catch (error) {
           // Refresh token has expired

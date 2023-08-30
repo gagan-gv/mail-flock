@@ -29,6 +29,8 @@
 
 <script>
 import axios from "axios";
+import { AUTH_API } from "@/utils/constants.js";
+import { errorToast } from "@/utils/toastSetup.js";
 
 export default {
   name: "LoginForm",
@@ -41,31 +43,23 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.post(
-          "http://127.0.0.1:8001/api/auth/login",
-          {
-            username: this.username,
-            password: this.password,
-          }
-        );
-
-        console.log("Response:" + JSON.stringify(response));
+        const response = await axios.post(AUTH_API + "/login", {
+          username: this.username,
+          password: this.password,
+        });
 
         const accessToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
-
-        console.log(accessToken);
-        console.log(refreshToken);
 
         if (accessToken) {
           localStorage.setItem("access_token", accessToken);
           localStorage.setItem("refresh_token", refreshToken);
           this.$router.push("/dashboard");
         } else {
-          console.log("Invalid Credentials");
+          errorToast("Invalid Creendtials");
         }
       } catch (error) {
-        console.log(error.response.message);
+        errorToast("Invalid Credentials");
       }
     },
   },
