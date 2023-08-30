@@ -23,7 +23,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import static com.example.mailflock.utils.Constants.FROM_MAIL;
 import static com.example.mailflock.utils.Constants.FROM_NAME;
@@ -40,7 +39,6 @@ public class AuthService implements IAuthService {
     private final SubscriptionService subscriptionService;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> registerUser(@NonNull RegistrationRequest request) {
         AuthenticationResponse response;
 
@@ -106,7 +104,6 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> verifyUser(@NonNull String emailId, @NonNull String otp) {
 
         AuthenticationResponse response;
@@ -143,7 +140,6 @@ public class AuthService implements IAuthService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<AuthenticationResponse> login(@NonNull AuthenticationRequest credentials) {
         AuthenticationResponse response;
 

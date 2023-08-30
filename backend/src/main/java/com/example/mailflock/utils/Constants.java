@@ -1,10 +1,7 @@
 package com.example.mailflock.utils;
 
-import org.springframework.beans.factory.annotation.Value;
-
 public record Constants() {
-    @Value("${spring.mail.username}")
-    public static String FROM_MAIL;
+    public static final String FROM_MAIL = "testbygagan@gmail.com";
 
     public static final String FROM_NAME = "Team Mail Flock";
 

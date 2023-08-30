@@ -56,7 +56,7 @@ export default {
           localStorage.setItem("refresh_token", refreshToken);
           this.$router.push("/dashboard");
         } else {
-          errorToast("Invalid Creendtials");
+          errorToast("Invalid Crendtials");
         }
       } catch (error) {
         errorToast("Invalid Credentials");
@@ -97,7 +97,7 @@ input {
   padding: 10px 20px;
   border-radius: 3px;
   border: 2px solid #222;
-  width: 300px;
+  width: 350px;
   line-height: 20px;
   background-color: #f8f8f8;
   -webkit-transition: 0.5s;
@@ -111,7 +111,7 @@ input:focus {
 }
 button {
   border: none;
-  width: 300px;
+  width: 350px;
   padding: 10px 20px;
   margin: 10px auto;
   font-weight: 600;
