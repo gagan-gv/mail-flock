@@ -42,7 +42,11 @@ export default {
   name: "NavBar",
   computed: {
     showNavbar() {
-      return this.$route.path !== "/login" && this.$route.path !== "/register";
+      return (
+        this.$route.path !== "/login" &&
+        this.$route.path !== "/register" &&
+        this.$route.name !== "verification"
+      );
     },
   },
 };

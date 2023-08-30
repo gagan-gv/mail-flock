@@ -173,7 +173,10 @@ export default {
           subscribe: this.subscribe,
         });
 
-        this.$router.push("/verification");
+        this.$router.push({
+          name: "verification",
+          params: { email: this.email },
+        });
       } catch (error) {
         errorToast(error.data.message);
       }

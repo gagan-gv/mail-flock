@@ -3,6 +3,7 @@ import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/authentication/Login.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
 import RegisterView from "@/views/authentication/Register.vue";
+import OTPVerification from "@/views/authentication/OTPVerification.vue";
 
 const routes = [
   {
@@ -27,6 +28,15 @@ const routes = [
     component: RegisterView,
     meta: {
       title: "Register",
+    },
+  },
+  {
+    path: "/verification/:email",
+    name: "verification",
+    component: OTPVerification,
+    props: true,
+    meta: {
+      title: "Verification",
     },
   },
   {
