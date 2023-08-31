@@ -96,7 +96,7 @@ input::-webkit-inner-spin-button {
 
 <script>
 import { AUTH_API } from "@/utils/constants";
-import { errorToast } from "@/utils/toastSetup";
+import { errorToast, successToast } from "@/utils/toastSetup";
 import axios from "axios";
 
 export default {
@@ -113,16 +113,27 @@ export default {
         this.$refs[`otpInput${index}`].focus();
       }
     },
-    verifyOTP() {
+    async verifyOTP() {
       try {
         const enteredOTP = this.otp.join("");
-        axios.patch(
-          AUTH_API + "/verify?emailId=" + this.email + "&otp=" + enteredOTP
+        const response = await axios.patch(
+          AUTH_API + "/verify?email=" + this.email + "&otp=" + enteredOTP
         );
 
-        this.$router.push("/login");
+        console.log(response);
+
+        if (response.status === 201) {
+          setTimeout(() => {
+            successToast(response.data.message);
+            setTimeout(() => {
+              this.$router.push("/login");
+            }, 1500);
+          }, 1000);
+        } else {
+          errorToast(response.data.message);
+        }
       } catch (error) {
-        errorToast(error.data.message);
+        errorToast(error.response.data.message);
       }
     },
   },

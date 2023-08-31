@@ -10,3 +10,11 @@ export function errorToast(msg) {
     dismissible: true,
   });
 }
+
+export function successToast(msg) {
+  toast.success(msg, {
+    position: "top",
+    duration: 2000,
+    dismissible: true,
+  });
+}
