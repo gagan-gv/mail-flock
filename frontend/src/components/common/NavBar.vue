@@ -5,9 +5,13 @@
         <img src="@/assets/logo.png" alt="Mail Flock Logo" />
       </router-link>
     </section>
-    <section class="nav-auth">
+    <section class="nav-auth" v-if="isNotLoggedIn">
       <router-link class="link sec-btn" to="/login">Login</router-link>
       <router-link class="link prm-btn" to="/register">Register</router-link>
+    </section>
+    <section class="nav-auth" v-else>
+      <router-link class="link" to="/dashboard">Dashboard</router-link>
+      <button class="link prm-btn" @click="logout">Logout</button>
     </section>
   </nav>
 </template>
@@ -35,6 +39,12 @@
   display: flex;
   gap: 30px;
 }
+
+button {
+  border: none;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 500;
+}
 </style>
 
 <script>
@@ -47,6 +57,21 @@ export default {
         this.$route.path !== "/register" &&
         this.$route.name !== "verification"
       );
+    },
+    isNotLoggedIn() {
+      const accessToken = localStorage.getItem("access_token");
+
+      return !accessToken;
+    },
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
+
+      this.isNotLoggedIn = false;
+
+      this.$router.push("/");
     },
   },
 };

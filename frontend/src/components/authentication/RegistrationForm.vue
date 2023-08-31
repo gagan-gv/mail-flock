@@ -182,5 +182,12 @@ export default {
       }
     },
   },
+  mounted() {
+    const accessToken = localStorage.getItem("access_token");
+
+    if (accessToken) {
+      this.$router.push("/dashboard");
+    }
+  },
 };
 </script>

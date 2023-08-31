@@ -56,12 +56,19 @@ export default {
           localStorage.setItem("refresh_token", refreshToken);
           this.$router.push("/dashboard");
         } else {
-          errorToast("Invalid Crendtials");
+          errorToast(response.data.message);
         }
       } catch (error) {
-        errorToast("Invalid Credentials");
+        errorToast(error.response.data.message);
       }
     },
+  },
+  mounted() {
+    const accessToken = localStorage.getItem("access_token");
+
+    if (accessToken) {
+      this.$router.push("/dashboard");
+    }
   },
 };
 </script>

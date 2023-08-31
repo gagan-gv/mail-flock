@@ -19,6 +19,8 @@
 
 <script>
 import axios from "axios";
+import { AUTH_API } from "@/utils/constants";
+
 export default {
   name: "HomeView",
   data() {
@@ -61,7 +63,7 @@ export default {
     async refreshAccessToken() {
       if (this.refreshToken) {
         try {
-          const response = await axios.post("/api/renew", {
+          const response = await axios.post(AUTH_API + "/renew", {
             refresh_token: this.refreshToken,
           });
           this.accessToken = response.data.accessToken;
