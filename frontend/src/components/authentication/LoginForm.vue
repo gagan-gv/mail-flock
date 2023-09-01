@@ -55,6 +55,7 @@ export default {
           localStorage.setItem("access_token", accessToken);
           localStorage.setItem("refresh_token", refreshToken);
           this.$router.push("/dashboard");
+          window.location.reload();
         } else {
           errorToast(response.data.message);
         }

@@ -66,11 +66,25 @@ export default {
   },
   methods: {
     logout() {
+      console.log(
+        localStorage.getItem("access_token") +
+          " " +
+          localStorage.getItem("refresh_token")
+      );
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
 
-      this.isNotLoggedIn = false;
+      console.log(
+        localStorage.getItem("access_token") +
+          " " +
+          localStorage.getItem("refresh_token")
+      );
 
+      this.isNotLoggedIn = true;
+
+      setInterval(() => {
+        window.location.reload();
+      }, 100);
       this.$router.push("/");
     },
   },
