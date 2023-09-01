@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,12 +20,12 @@ public class ContactController {
     private final ContactService contactService;
 
     @PostMapping
-    public ResponseEntity<MessageResponse> contact(ContactRequest request) {
+    public ResponseEntity<MessageResponse> contact(@RequestBody ContactRequest request) {
         return contactService.contact(request);
     }
 
     @PostMapping("/demo")
-    public ResponseEntity<MessageResponse> bookDemo(DemoRequest request) {
+    public ResponseEntity<MessageResponse> bookDemo(@RequestBody DemoRequest request) {
         return contactService.bookDemo(request);
     }
 }

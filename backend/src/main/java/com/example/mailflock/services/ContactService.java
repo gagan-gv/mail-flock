@@ -42,7 +42,7 @@ public class ContactService implements IContactService {
             String mailResponse =
                     "Hey " + request.getName() + "\n" +
                     "Subject: " + request.getSubject() + "\n" +
-                    "Message: " + request.getContent() + "\n" +
+                    "Message: " + request.getContent() + "\n\n" +
                     "We will get back soon.\n\n" +
                     "Regards,\n" + FROM_NAME;
 
