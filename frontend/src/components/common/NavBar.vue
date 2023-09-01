@@ -6,11 +6,14 @@
       </router-link>
     </section>
     <section class="nav-auth" v-if="isNotLoggedIn">
+      <router-link class="link" to="/contact">Contact Us</router-link>
+      <router-link class="link" to="/demo">Book a Demo</router-link>
       <router-link class="link sec-btn" to="/login">Login</router-link>
       <router-link class="link prm-btn" to="/register">Register</router-link>
     </section>
     <section class="nav-auth" v-else>
       <router-link class="link" to="/dashboard">Dashboard</router-link>
+      <router-link class="link" to="/templates">Templates</router-link>
       <button class="link prm-btn" @click="logout">Logout</button>
     </section>
   </nav>
@@ -66,19 +69,8 @@ export default {
   },
   methods: {
     logout() {
-      console.log(
-        localStorage.getItem("access_token") +
-          " " +
-          localStorage.getItem("refresh_token")
-      );
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
-
-      console.log(
-        localStorage.getItem("access_token") +
-          " " +
-          localStorage.getItem("refresh_token")
-      );
 
       this.isNotLoggedIn = true;
 

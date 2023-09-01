@@ -4,6 +4,7 @@ import LoginView from "@/views/authentication/Login.vue";
 import PageNotFound from "@/views/PageNotFound.vue";
 import RegisterView from "@/views/authentication/Register.vue";
 import OTPVerification from "@/views/authentication/OTPVerification.vue";
+import ContactView from "@/views/contact/Contact.vue";
 
 const routes = [
   {
@@ -37,6 +38,14 @@ const routes = [
     props: true,
     meta: {
       title: "Verification",
+    },
+  },
+  {
+    path: "/contact",
+    name: "contact",
+    component: ContactView,
+    meta: {
+      title: "Mail Flock - Contact",
     },
   },
   {
