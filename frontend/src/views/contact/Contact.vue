@@ -1,16 +1,24 @@
 <template>
   <main>
-    <ContactForm />
+    <ContactForm v-if="showContact" />
+    <DemoForm v-else />
   </main>
 </template>
 
 <script>
 import ContactForm from "@/components/contact/ContactForm.vue";
+import DemoForm from "@/components/contact/DemoForm.vue";
 
 export default {
   name: "ContactView",
   components: {
     ContactForm,
+    DemoForm,
+  },
+  computed: {
+    showContact() {
+      return this.$route.path == "/contact";
+    },
   },
 };
 </script>

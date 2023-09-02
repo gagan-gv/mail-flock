@@ -49,6 +49,14 @@ const routes = [
     },
   },
   {
+    path: "/demo",
+    name: "demo",
+    component: ContactView,
+    meta: {
+      title: "Mail Flock - Book a Demo",
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "page not found",
     component: PageNotFound,
