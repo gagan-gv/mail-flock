@@ -8,6 +8,17 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 
 - [High Level Design](https://www.notion.so/gaganchordia/Mail-Flock-70d9b073f9c944899540b49d2af47afc?pvs=4)
 
+## Backend
+
+### Frameworks
+
+- Spring Boot
+- Spring Mail
+- Thymeleaf
+- Spring Security
+- Spring JPA
+- Lombok
+
 ## API Endpoints
 
 ### Authorization
@@ -57,5 +68,29 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 
 ## Testing
 
-- Manual using Postman
+- Manually using Postman
 - Unit Tests with JUnit5 and Mockito
+
+## Frontend
+
+### Framework
+
+- Vue.js 3
+- Vue Toast Notification
+- Axios
+
+### TO DO
+
+- [x] Home Page
+- [x] Login
+- [x] Register & OTP Verification
+- [x] Page Not Found
+- [x] Contact
+- [x] Book a Demo
+- [ ] Dashboard
+- [ ] View Templates
+- [ ] Create/Update Templates
+- [ ] Send Mail
+- [ ] Profile
+- [ ] Delete account
+- [ ] Subscribe/Unsubscribe
