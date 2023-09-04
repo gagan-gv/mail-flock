@@ -5,6 +5,7 @@ import PageNotFound from "@/views/PageNotFound.vue";
 import RegisterView from "@/views/authentication/Register.vue";
 import OTPVerification from "@/views/authentication/OTPVerification.vue";
 import ContactView from "@/views/contact/Contact.vue";
+import DashboardView from "@/views/dashboard/DashboardView.vue";
 
 const routes = [
   {
@@ -54,6 +55,14 @@ const routes = [
     component: ContactView,
     meta: {
       title: "Mail Flock - Book a Demo",
+    },
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashboardView,
+    meta: {
+      title: "Dashboard",
     },
   },
   {

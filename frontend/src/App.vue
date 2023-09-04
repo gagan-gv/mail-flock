@@ -8,6 +8,7 @@
 // @ is an alias to /src
 import NavBar from "@/components/common/NavBar.vue";
 import FooterComponent from "@/components/common/Footer.vue";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 export default {
   name: "LoginView",
@@ -26,7 +27,7 @@ export default {
   text-align: center;
   color: #222;
   background-color: #f3f3f3;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .link,
