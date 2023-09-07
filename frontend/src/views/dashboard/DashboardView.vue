@@ -42,7 +42,7 @@ export default {
           id: 3,
           routeTo: "/profile",
           iconClass: "fa-regular fa-user",
-          action: "My Profile",
+          action: "Profile Settings",
         },
       ],
       username: this.getUsername(),

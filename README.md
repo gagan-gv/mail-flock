@@ -87,7 +87,7 @@ Cold mailing has emerged as a vital component in various industries, such as mar
 - [x] Page Not Found
 - [x] Contact
 - [x] Book a Demo
-- [ ] Dashboard
+- [x] Dashboard
 - [ ] View Templates
 - [ ] Create/Update Templates
 - [ ] Send Mail

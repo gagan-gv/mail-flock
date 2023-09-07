@@ -13,7 +13,7 @@ const routes = [
     name: "default",
     component: HomeView,
     meta: {
-      title: "Home",
+      title: "Mail Flock",
     },
   },
   {
@@ -21,7 +21,7 @@ const routes = [
     name: "login",
     component: LoginView,
     meta: {
-      title: "Login",
+      title: "Mail Flock - Login",
     },
   },
   {
@@ -29,7 +29,7 @@ const routes = [
     name: "register",
     component: RegisterView,
     meta: {
-      title: "Register",
+      title: "Mail Flock - Register",
     },
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     component: OTPVerification,
     props: true,
     meta: {
-      title: "Verification",
+      title: "Mail Flock - User Verification",
     },
   },
   {
@@ -62,7 +62,7 @@ const routes = [
     name: "dashboard",
     component: DashboardView,
     meta: {
-      title: "Dashboard",
+      title: "Mail Flock - Dashboard",
     },
   },
   {
