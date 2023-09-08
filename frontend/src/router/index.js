@@ -6,6 +6,7 @@ import RegisterView from "@/views/authentication/Register.vue";
 import OTPVerification from "@/views/authentication/OTPVerification.vue";
 import ContactView from "@/views/contact/Contact.vue";
 import DashboardView from "@/views/dashboard/DashboardView.vue";
+import CreateTemplateView from "@/views/templates/CreateTemplateView.vue";
 
 const routes = [
   {
@@ -63,6 +64,14 @@ const routes = [
     component: DashboardView,
     meta: {
       title: "Mail Flock - Dashboard",
+    },
+  },
+  {
+    path: "/templates/create",
+    name: "create template",
+    component: CreateTemplateView,
+    meta: {
+      title: "Mail Flock - Create Template",
     },
   },
   {
