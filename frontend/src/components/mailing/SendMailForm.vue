@@ -1,16 +1,16 @@
 <template>
-  <section class="create-template-container">
-    <h3>Create a Template</h3>
-    <form @submit.prevent="createTemplate">
-      <label for="template-name">Template Name:</label>
+  <section class="send-mail-container">
+    <h3>Send Mail</h3>
+    <form @submit.prevent="sendMail">
+      <label for="recipients">Recipient's Email Adresses:</label>
       <input
         type="text"
-        v-model="templateName"
-        name="template-name"
-        id="template-name"
+        name="recipients"
+        id="recipients"
+        v-model="to_mail"
+        @input="parseEmail"
         required
         autocomplete="off"
-        autocapitalize="words"
       />
       <section>
         <input type="checkbox" v-model="isHTML" name="isHTML" id="isHTML" />
@@ -35,42 +35,43 @@
         autocomplete="off"
         autocapitalize="words"
       ></textarea>
-      <button class="prm-btn" type="submit">Save Template</button>
+      <button class="prm-btn" type="submit">Send Mail</button>
     </form>
   </section>
 </template>
 
 <script>
-import { TEMPLATE_API } from "@/utils/constants";
+import { MAILING_API } from "@/utils/constants";
 import { errorToast, successToast } from "@/utils/toastSetup";
 import axios from "axios";
 
 export default {
-  name: "CreateForm",
+  name: "SendMailForm",
   data() {
     return {
-      templateName: "",
+      to_mail: "",
       subject: "",
       content: "",
-      isHTML: "",
+      isHTML: false,
+      to_mail_array: [],
     };
   },
   methods: {
-    async createTemplate() {
+    async sendMail() {
       try {
         const accessToken = localStorage.getItem("access_token");
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${accessToken}`;
 
-        const response = await axios.post(TEMPLATE_API, {
-          name: this.templateName,
+        const response = await axios.post(MAILING_API, {
+          to_mail: this.to_mail_array,
           subject: this.subject,
           content: this.content,
           html: this.isHTML,
         });
 
-        if (response.status == 201) {
+        if (response.status == 200) {
           successToast(response.data.message);
         } else {
           errorToast(response.data.message);
@@ -79,18 +80,22 @@ export default {
         errorToast(error.response.data.message);
       }
     },
+
+    parseEmail() {
+      this.to_mail_array = this.to_mail.split(",").map((val) => val.trim());
+    },
   },
 };
 </script>
 
 <style scoped>
-.create-template-container,
+.send-mail-container,
 form {
   display: flex;
   flex-direction: column;
 }
 
-.create-template-container {
+.send-mail-container {
   background-color: #f8f8f8;
   align-items: center;
   border: 2px solid #222;
@@ -98,7 +103,7 @@ form {
   padding: 20px;
   width: max-content;
   color: #222;
-  margin: 0 auto;
+  margin: 50px auto;
 }
 
 form {

@@ -7,6 +7,7 @@ import OTPVerification from "@/views/authentication/OTPVerification.vue";
 import ContactView from "@/views/contact/Contact.vue";
 import DashboardView from "@/views/dashboard/DashboardView.vue";
 import CreateTemplateView from "@/views/templates/CreateTemplateView.vue";
+import SendMailView from "@/views/mailing/SendMailView.vue";
 
 const routes = [
   {
@@ -72,6 +73,14 @@ const routes = [
     component: CreateTemplateView,
     meta: {
       title: "Mail Flock - Create Template",
+    },
+  },
+  {
+    path: "/send-mail",
+    name: "send mail",
+    component: SendMailView,
+    meta: {
+      title: "Mail Flock - Send Mail",
     },
   },
   {
