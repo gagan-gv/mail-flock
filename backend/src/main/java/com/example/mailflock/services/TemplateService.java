@@ -40,8 +40,9 @@ public class TemplateService implements ITemplateService {
             Template template = Template.builder()
                     .name(details.getName())
                     .subject(details.getSubject())
-                    .content(details.getSubject())
+                    .content(details.getContent())
                     .isHTML(details.isHTML())
+                    .timesUsed(0L)
                     .user(user)
                     .build();
 
